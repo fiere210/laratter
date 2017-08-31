@@ -14,12 +14,26 @@
     </div>
 
     <div class="row">
+        <form action="/messages/create" method="POST">
+            <div class="form-group @if($errors->has('message')) has-danger @endif">
+                {{ csrf_field() }}
+                <input type="text" name="message" class="form-control" placeholder="¿Qué estás pensando?">
+                @if ($errors->has('message'))
+                    @foreach($errors->get('message') as $error)
+                        <div class="form-control-feedback">{{ $error }}</div>
+                    @endforeach
+                @endif
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
         @forelse($messages as $message)
             <div class="col-6">
-                <img src="{{ $message['image'] }}" alt="imagen-{{ $message['id'] }}" class="img-thumbnail">
+                <img src="{{ $message->image }}" alt="imagen-{{ $message->id }}" class="img-thumbnail">
                 <p class="card-text">
-                    {{ $message['content'] }}
-                    <a href="/messages/{{ $message['id'] }}">Leer más</a>
+                    {{ $message->content }}
+                    <a href="/messages/{{ $message->id }}">Leer más</a>
                 </p>
             </div>
         @empty
