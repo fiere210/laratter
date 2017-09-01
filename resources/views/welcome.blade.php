@@ -30,15 +30,17 @@
     <div class="row">
         @forelse($messages as $message)
             <div class="col-6">
-                <img src="{{ $message->image }}" alt="imagen-{{ $message->id }}" class="img-thumbnail">
-                <p class="card-text">
-                    {{ $message->content }}
-                    <a href="/messages/{{ $message->id }}">Leer más</a>
-                </p>
+                @include('messages.message')
             </div>
         @empty
             <p>No hay mensajes destacados</p>
         @endforelse
+
+        @if(count($messages))
+            <div class="mt-2 mx-auto">
+                {{ $messages->links('pagination::bootstrap-4') }}
+            </div>
+        @endif
     </div>
 
 @endsection
