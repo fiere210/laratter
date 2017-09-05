@@ -30,4 +30,3 @@ Route::get('/{username}', 'UsersController@show');
 Route::get('/{username}/follows', 'UsersController@follows');
 Route::get('/{username}/followers', 'UsersController@followers');
 Route::post('/messages', 'MessagesController@search');
-
