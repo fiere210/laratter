@@ -2,6 +2,6 @@
 
 @section('content')
 
-	No hemos podido encontrar lo que buscas
+	Ha ocurrido un error en el servidor
 
 @endsection
