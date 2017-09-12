@@ -32,7 +32,7 @@ class MessagesController extends Controller
   {
     $query = $request->input('query');
 
-    //$messages = Message::with('user')->where('content', 'LIKE', "%$query%")->get();
+    //$messages = Message::with('user')->where('content', 'LIKE', '%'.$query.'%')->get();
     //con laravel scout y algolia
     $messages = Message::search($query)->get();
     $messages->load('user');
@@ -40,5 +40,10 @@ class MessagesController extends Controller
     return view('messages.index', [
       'messages' => $messages
     ]);
+  }
+
+  public function responses(Message $message)
+  {
+    return $message->responses;
   }
 }

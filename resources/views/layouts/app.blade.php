@@ -11,11 +11,11 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
 <body>
     <div id="app" class="container">
-        <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -26,8 +26,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         <li class="nav nav-item">
-                            <form action="/messages" method="POST">
-                                {{ csrf_field() }}
+                            <form action="/messages">
                                 <div class="input-group">
                                     <input type="text" name="query" class="form-control" placeholder="Buscar..." required>
                                     <span class="input-group-btn">
@@ -45,6 +44,15 @@
                             <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Entrar</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Registrarse</a></li>
                         @else
+                            <li class="nav-item dropdown mr-2">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                    Notificaciones
+                                    <span class="caret"></span>
+                                </a>
+
+                                <notifications :user="{{ Auth::user()->id }}">
+                                </notifications>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -72,8 +80,8 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
+
 </body>
 </html>

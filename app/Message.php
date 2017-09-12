@@ -18,6 +18,12 @@ class Message extends Model
   	return $this->belongsTo(User::class);
   }
 
+  public function responses()
+  {
+    //return $this->hasMany(Response::class)->orderBy('created_at', 'desc');
+    return $this->hasMany(Response::class)->latest();  //Es lo mismo de arriba
+  }
+
   public function getImageAttribute($image)
   {
   	if(!$image || starts_with($image, 'http')){
@@ -25,5 +31,12 @@ class Message extends Model
   	}
 
   	return \Storage::disk('public')->url($image);
+  }
+
+  public function toSearchableArray()
+  {
+    $this->load('user');
+
+    return $this->toArray();
   }
 }

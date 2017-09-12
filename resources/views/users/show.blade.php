@@ -3,6 +3,7 @@
 @section('content')
 
 	<h1> {{ $user->name }} </h1>
+	<h3> {{ $user->email }} </h3>
 
 	<a href="/{{ $user->username }}/follows" class="btn btn-link">
 		Sigue a <span class="badge badge-default">{{ $user->follows->count() }}</span> Usuarios

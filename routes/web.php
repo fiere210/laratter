@@ -24,9 +24,11 @@ Route::group(['middleware' => 'auth'], function (){
 	Route::get('/conversations/{conversation}', 'UsersController@showConversation');
 	Route::post('/{username}/follow', 'UsersController@follow');
 	Route::post('/{username}/unfollow', 'UsersController@unfollow');
+	Route::get('/api/notifications', 'UsersController@notifications');
 });
 
+Route::get('/api/messages/{message}/responses', 'MessagesController@responses');
+Route::get('/messages', 'MessagesController@search');
 Route::get('/{username}', 'UsersController@show');
 Route::get('/{username}/follows', 'UsersController@follows');
 Route::get('/{username}/followers', 'UsersController@followers');
-Route::post('/messages', 'MessagesController@search');
